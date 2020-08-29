@@ -3,17 +3,45 @@ package main
 import (
 	"fmt"
 	"os"
-  "time"
+	"time"
+	"net/http"
 )
 
-func main() {
+// https://stackoverflow.com/a/45909815/385205
+func wrapHandlerWithLogging(wrappedHandler http.Handler) http.HandlerFunc {
+    return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
+       fmt.Printf("--> %s %s\n", req.Method, req.URL.Path)
+       wrappedHandler.ServeHTTP(w, req)
+    })
+}
+
+// https://gobyexample.com/http-servers
+func hello(w http.ResponseWriter, req *http.Request) {
 	name, err := os.Hostname()
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("hostname: ", name)
+	fmt.Fprintf(w, "hostname: " + name + "\n")
 
-  t := time.Now()
-  fmt.Println("\ntimenow: " + t.String())
+	t := time.Now()
+	fmt.Fprintf(w, "timenow: " + t.String() )
+	
+	fmt.Println("timenow: " + t.String() )
+}
+
+func headers(w http.ResponseWriter, req *http.Request) {
+	for name, headers := range req.Header {
+		for _, h := range headers {
+			fmt.Fprintf(w, "%v: %v\n", name, h)
+		}
+	}
+}	
+
+func main() {
+	http.HandleFunc("/headers", headers)
+	http.HandleFunc("/", wrapHandlerWithLogging(http.HandlerFunc(hello)))
+	
+	fmt.Println( "Starting application server in port 80")
+	http.ListenAndServe(":80", nil)
 }
