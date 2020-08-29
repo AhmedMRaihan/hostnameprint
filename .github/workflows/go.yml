@@ -6,7 +6,7 @@ on:
 
 jobs:
 
- build:
+ build-and-push:
     name: Build go project
     runs-on: ubuntu-latest
     steps:
@@ -34,10 +34,7 @@ jobs:
     - name: Test
       run: go test -v .
 
- dockeractions:
-   name: Push to docker hub
-   runs-on: ubunt-latest
-   steps:
+# push to dockerhub
     - name: Checkout code
       uses: actions/checkout@v2
 
