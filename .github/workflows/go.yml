@@ -15,8 +15,6 @@ jobs:
 # build golang project
     - name: run
       uses: cedrickring/golang-action@1.6.0
-      with:
-        args: build
 
 # push to dockerhub
     - name: Checkout code
