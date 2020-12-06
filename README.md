@@ -1,2 +1,2 @@
 
-![Go](https://github.com/MythicAngel/hostnameprint/workflows/Go/badge.svg)
+![Go](https://github.com/AhmedMRaihan/hostnameprint/workflows/Go/badge.svg)
