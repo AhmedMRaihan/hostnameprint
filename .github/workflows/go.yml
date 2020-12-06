@@ -32,7 +32,6 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        repository: ${{ secrets.DOCKER_REPOSITORY }}
-        tags: latest
+        tags: ${{ secrets.DOCKER_REPOSITORY }}:latest
 
 
