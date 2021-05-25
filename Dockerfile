@@ -1,9 +1,9 @@
 FROM golang:alpine as builder
-ENV CGO_ENABLED=0
-ENV GOOS=linux 
 RUN mkdir /build 
 ADD . /build/
 WORKDIR /build 
+ENV CGO_ENABLED=0
+ENV GOOS=linux 
 RUN go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o main .
 FROM scratch
 COPY --from=builder /build/main /app/
