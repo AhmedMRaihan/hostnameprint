@@ -19,9 +19,6 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_AUTH_TOKEN }}
 
-    - name: file system display
-      run: ls -alh
-
     - name: Build and push
       id: docker_build
       uses: docker/build-push-action@v2

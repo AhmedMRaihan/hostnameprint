@@ -8,4 +8,3 @@ COPY --from=builder /build/main /app/
 WORKDIR /app
 CMD ["./main"]
 
-# reference: https://www.cloudreach.com/en/resources/blog/cts-build-golang-dockerfiles
