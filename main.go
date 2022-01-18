@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 	"net/http"
+	"log"
 )
 
 // https://stackoverflow.com/a/45909815/385205
@@ -21,6 +22,8 @@ func hello(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		panic(err)
 	}
+
+	log.Println("Request recieved")
 
 	fmt.Fprintf(w, "hostname: " + name + "\n")
 
